@@ -1,5 +1,5 @@
 // Replace with your Google Apps Script deployment URL
-const API_URL = "YOUR_SCRIPT_URL";
+const API_URL = "https://script.google.com/macros/s/AKfycbwge8DqxADK0Ba7OeSnP8kQSgwBLMFTEidpp8zs19OZthFE-pi0TRtDgWrb9fUfnSog/exec";
 
 // Save household
 async function saveHousehold(blockName, address, contact) {
