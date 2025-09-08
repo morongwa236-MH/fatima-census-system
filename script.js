@@ -46,3 +46,21 @@ async function getAllRecords() {
   const response = await fetch(API_URL);
   return response.json();
 }
+
+// Edit record
+async function editRecord(type, id, updatedData) {
+  const response = await fetch(API_URL, {
+    method: "PUT",
+    body: JSON.stringify({ type, id, ...updatedData })
+  });
+  return response.json();
+}
+
+// Delete record
+async function removeRecord(type, id) {
+  const response = await fetch(API_URL, {
+    method: "DELETE",
+    body: JSON.stringify({ type, id })
+  });
+  return response.json();
+}
