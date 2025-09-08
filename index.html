@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Fatima Census Form</title>
+  <script src="script.js"></script>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    h1, h2 { color: darkblue; }
+    form { margin-bottom: 30px; padding: 15px; border: 1px solid #ccc; }
+    label { display: block; margin-top: 8px; }
+    input, select { width: 100%; padding: 6px; margin-top: 2px; }
+    button { margin-top: 10px; padding: 8px 12px; background: darkblue; color: white; border: none; cursor: pointer; }
+    button:hover { background: navy; }
+  </style>
+</head>
+<body>
+  <h1>Our Lady of Fatima Shrine - Census Form</h1>
+
+  <!-- Household -->
+  <h2>Household Info</h2>
+  <form id="householdForm">
+    <label>Block Name: <input type="text" id="blockName" required></label>
+    <label>Address: <input type="text" id="address" required></label>
+    <label>Main Contact: <input type="text" id="mainContact" required></label>
+    <button type="submit">Save Household</button>
+  </form>
+
+  <!-- Members -->
+  <h2>Member Info</h2>
+  <form id="memberForm">
+    <label>Household ID (auto-filled after saving household):
+      <input type="text" id="householdId" readonly>
+    </label>
+    <label>Full Name: <input type="text" id="fullName" required></label>
+    <label>Date of Birth: <input type="date" id="dob" required></label>
+    <label>Catholic: 
+      <select id="catholic"><option>Yes</option><option>No</option></select>
+    </label>
+    <label>Occupation: <input type="text" id="occupation"></label>
+    <label>Church Activities: <input type="text" id="activities"></label>
+    <label>Solidarity/Ministry: <input type="text" id="solidarity"></label>
+    <label>Leadership: <input type="text" id="leadership"></label>
+
+    <!-- Sacraments -->
+    <h3>Sacraments</h3>
+    <label>Baptised? 
+      <select id="baptised" onchange="toggleSection('baptised', 'baptismFields')">
+        <option>No</option><option>Yes</option>
+      </select>
+    </label>
+    <div id="baptismFields" style="display:none;">
+      <label>Date of Baptism: <input type="date" id="baptismDate"></label>
+      <label>Registration No: <input type="text" id="baptismRegNo"></label>
+      <label>Church of Baptism: <input type="text" id="baptismChurch"></label>
+      <label>Location of Church: <input type="text" id="baptismLocation"></label>
+    </div>
+
+    <label>1st Communion? 
+      <select id="firstCommunion" onchange="toggleSection('firstCommunion', 'communionFields')">
+        <option>No</option><option>Yes</option>
+      </select>
+    </label>
+    <div id="communionFields" style="display:none;">
+      <label>Date: <input type="date" id="firstCommunionDate"></label>
+      <label>Church: <input type="text" id="firstCommunionChurch"></label>
+    </div>
+
+    <label>Confirmation? 
+      <select id="confirmation" onchange="toggleSection('confirmation', 'confirmationFields')">
+        <option>No</option><option>Yes</option>
+      </select>
+    </label>
+    <div id="confirmationFields" style="display:none;">
+      <label>Date: <input type="date" id="confirmationDate"></label>
+      <label>Church: <input type="text" id="confirmationChurch"></label>
+    </div>
+
+    <!-- Marital -->
+    <h3>Marital Info</h3>
+    <label>Marital Status:
+      <select id="maritalStatus">
+        <option>Single</option><option>Married</option><option>Widow(er)</option>
+      </select>
+    </label>
+    <label>Civil Court Marriage Date: <input type="date" id="civilMarriageDate"></label>
+    <label>Church Marriage Date: <input type="date" id="churchMarriageDate"></label>
+    <label>Church Marriage Place: <input type="text" id="churchMarriagePlace"></label>
+    <label>Divorced: 
+      <select id="divorced"><option>No</option><option>Yes</option></select>
+    </label>
+
+    <button type="submit">Save Member</button>
+  </form>
+
+  <!-- Children -->
+  <h2>Children Info</h2>
+  <form id="childForm">
+    <label>Household ID (auto-filled): <input type="text" id="childHouseholdId" readonly></label>
+    <label>First Name: <input type="text" id="childFirstName" required></label>
+    <label>Last Name: <input type="text" id="childLastName" required></label>
+    <label>Date of Birth: <input type="date" id="childDob" required></label>
+    <label>Age: <input type="number" id="childAge"></label>
+    <label>Catholic: 
+      <select id="childCatholic"><option>Yes</option><option>No</option></select>
+    </label>
+    <label>Church Activities: <input type="text" id="childActivities"></label>
+
+    <!-- Sacraments for children -->
+    <h3>Sacraments</h3>
+    <label>Baptised?
+      <select id="childBaptised" onchange="toggleSection('childBaptised', 'childBaptismFields')">
+        <option>No</option><option>Yes</option>
+      </select>
+    </label>
+    <div id="childBaptismFields" style="display:none;">
+      <label>Date of Baptism: <input type="date" id="childBaptismDate"></label>
+      <label>Registration No: <input type="text" id="childBaptismRegNo"></label>
+      <label>Church of Baptism: <input type="text" id="childBaptismChurch"></label>
+      <label>Location of Church: <input type="text" id="childBaptismLocation"></label>
+    </div>
+
+    <label>1st Communion?
+      <select id="childFirstCommunion" onchange="toggleSection('childFirstCommunion', 'childCommunionFields')">
+        <option>No</option><option>Yes</option>
+      </select>
+    </label>
+    <div id="childCommunionFields" style="display:none;">
+      <label>Date: <input type="date" id="childFirstCommunionDate"></label>
+      <label>Church: <input type="text" id="childFirstCommunionChurch"></label>
+    </div>
+
+    <label>Confirmation?
+      <select id="childConfirmation" onchange="toggleSection('childConfirmation', 'childConfirmationFields')">
+        <option>No</option><option>Yes</option>
+      </select>
+    </label>
+    <div id="childConfirmationFields" style="display:none;">
+      <label>Date: <input type="date" id="childConfirmationDate"></label>
+      <label>Church: <input type="text" id="childConfirmationChurch"></label>
+    </div>
+
+    <button type="submit">Save Child</button>
+  </form>
+
+  <script>
+    function toggleSection(selectId, sectionId) {
+      const select = document.getElementById(selectId);
+      const section = document.getElementById(sectionId);
+      section.style.display = (select.value === "Yes") ? "block" : "none";
+    }
+
+    // Household save
+    document.getElementById("householdForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      let result = await saveHousehold(
+        document.getElementById("blockName").value,
+        document.getElementById("address").value,
+        document.getElementById("mainContact").value
+      );
+      alert("Household saved! ID: " + result.householdId);
+      document.getElementById("householdId").value = result.householdId;
+      document.getElementById("childHouseholdId").value = result.householdId;
+    });
+
+    // Member save
+    document.getElementById("memberForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      let memberData = {
+        fullName: document.getElementById("fullName").value,
+        dob: document.getElementById("dob").value,
+        catholic: document.getElementById("catholic").value,
+        occupation: document.getElementById("occupation").value,
+        activities: document.getElementById("activities").value,
+        solidarity: document.getElementById("solidarity").value,
+        leadership: document.getElementById("leadership").value,
+        baptised: document.getElementById("baptised").value,
+        baptismDate: document.getElementById("baptismDate").value,
+        baptismRegNo: document.getElementById("baptismRegNo").value,
+        baptismChurch: document.getElementById("baptismChurch").value,
+        baptismLocation: document.getElementById("baptismLocation").value,
+        firstCommunion: document.getElementById("firstCommunion").value,
+        firstCommunionDate: document.getElementById("firstCommunionDate").value,
+        firstCommunionChurch: document.getElementById("firstCommunionChurch").value,
+        confirmation: document.getElementById("confirmation").value,
+        confirmationDate: document.getElementById("confirmationDate").value,
+        confirmationChurch: document.getElementById("confirmationChurch").value,
+        maritalStatus: document.getElementById("maritalStatus").value,
+        civilMarriageDate: document.getElementById("civilMarriageDate").value,
+        churchMarriageDate: document.getElementById("churchMarriageDate").value,
+        churchMarriagePlace: document.getElementById("churchMarriagePlace").value,
+        divorced: document.getElementById("divorced").value
+      };
+      let result = await saveMember(document.getElementById("householdId").value, memberData);
+      alert(result.message);
+    });
+
+    // Child save
+    document.getElementById("childForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      let childData = {
+        firstName: document.getElementById("childFirstName").value,
+        lastName: document.getElementById("childLastName").value,
+        dob: document.getElementById("childDob").value,
+        age: document.getElementById("childAge").value,
+        catholic: document.getElementById("childCatholic").value,
+        activities: document.getElementById("childActivities").value,
+        baptised: document.getElementById("childBaptised").value,
+        baptismDate: document.getElementById("childBaptismDate").value,
+        baptismRegNo: document.getElementById("childBaptismRegNo").value,
+        baptismChurch: document.getElementById("childBaptismChurch").value,
+        baptismLocation: document.getElementById("childBaptismLocation").value,
+        firstCommunion: document.getElementById("childFirstCommunion").value,
+        firstCommunionDate: document.getElementById("childFirstCommunionDate").value,
+        firstCommunionChurch: document.getElementById("childFirstCommunionChurch").value,
+        confirmation: document.getElementById("childConfirmation").value,
+        confirmationDate: document.getElementById("childConfirmationDate").value,
+        confirmationChurch: document.getElementById("childConfirmationChurch").value
+      };
+      let result = await saveChild(document.getElementById("childHouseholdId").value, childData);
+      alert(result.message);
+    });
+  </script>
+</body>
+</html>
