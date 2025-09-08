@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Dashboard</title>
+  <script src="script.js"></script>
+  <style>
+    body { font-family: Arial; margin: 20px; }
+    pre { background: #f4f4f4; padding: 10px; }
+  </style>
+</head>
+<body>
+  <h1>Admin Dashboard</h1>
+  <button onclick="loadRecords()">Load All Records</button>
+  <div id="records"></div>
+
+  <script>
+    async function loadRecords() {
+      const data = await getAllRecords();
+      document.getElementById("records").innerHTML =
+        "<h2>Households</h2><pre>" + JSON.stringify(data.households, null, 2) +
+        "</pre><h2>Members</h2><pre>" + JSON.stringify(data.members, null, 2) +
+        "</pre><h2>Children</h2><pre>" + JSON.stringify(data.children, null, 2) + "</pre>";
+    }
+  </script>
+</body>
+</html>
